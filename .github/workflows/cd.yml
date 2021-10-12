@@ -1,4 +1,4 @@
-name: Heroku Deployment
+name: Codigician CI/CD
 
 on:
   push:
@@ -19,8 +19,25 @@ jobs:
         cache: maven
     - name: Buid application jar
       run: mvn package
+    - name: List directories
+      run: ls
 
-#  staging-deploy:
+  list:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: List directories
+      run: ls -la
+    needs: [build]
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build docker container
+      run: docker build . --tag codigician-api:$(date +%s)
+    needs: [list]
+    #  staging-deploy:
 #    runs-on: ubuntu-latest
 #    steps:
 #    - uses: actions/checkout@v2
