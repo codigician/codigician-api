@@ -19,25 +19,11 @@ jobs:
         cache: maven
     - name: Buid application jar
       run: mvn package
-    - name: List directories
-      run: ls
     - name: Upload application fat jar artifact
       uses: actions/upload-artifact@v2
       with:
         name: fat-jar
         path: target/*.jar
-
-  list:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Download fat jar
-      uses: actions/download-artifact@v2
-      with:
-        name: fat-jar
-    - name: List directories
-      run: ls -la
-    needs: [build]
 
   package:
     runs-on: ubuntu-latest
@@ -49,14 +35,24 @@ jobs:
         name: fat-jar
     - name: Build docker container
       run: docker build . --tag codigician-api:$(date +%s)
-    needs: [list]
-    #  staging-deploy:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Deploy to Heroku
-#      uses: AkhileshNS/heroku-deploy@v3.12.12
-#      with:
-#        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-#        heroku_email: ${{secrets.HEROKU_EMAIL}}
-#        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+    needs: [build]
+
+  staging-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download fat jar
+      uses: actions/download-artifact@v2
+      with:
+        name: fat-jar
+    - name: Deploy to Heroku
+      uses: gonuit/heroku-docker-deploy@v1.3.3
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        email: ${{secrets.HEROKU_EMAIL}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        dockerfile_name: Dockerfile
+        dockerfile_directory: ./
+        docker_options: "--no-cache"
+        process_type: web
+    needs: [build]
