@@ -43,6 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Download fat jar
+      uses: actions/download-artifact@v2
+      with:
+        name: fat-jar
     - name: Build docker container
       run: docker build . --tag codigician-api:$(date +%s)
     needs: [list]
