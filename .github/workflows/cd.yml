@@ -21,11 +21,20 @@ jobs:
       run: mvn package
     - name: List directories
       run: ls
+    - name: Upload application fat jar artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: fat-jar
+        path: target/*.jar
 
   list:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Download fat jar
+      uses: actions/download-artifact@v2
+      with:
+        name: fat-jar
     - name: List directories
       run: ls -la
     needs: [build]
