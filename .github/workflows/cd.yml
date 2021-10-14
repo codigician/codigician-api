@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Running unit tests
-        run: mvn -B test --file pom.xml
+        run: sudo apt-get update maven && mvn -B test --file pom.xml
     needs: [build]
 
   staging-deploy:
