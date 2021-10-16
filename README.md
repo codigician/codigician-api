@@ -22,9 +22,12 @@ Requirements:
 
 curl -i -X POST <host>/:qid {questionId: …, solution: ….}
 
-# Priority:
+# Priority
 1. Remote code execution
 2. Question bank (Editorial) (Unit tests, benchmark tests)
 3. User
 4. Discussion
 
+# Container Structure Design
+
+![container structure](.docs/png/container-structure.png)
