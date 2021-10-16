@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,9 +16,11 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-        cache: maven
-    - name: Buid application jar
+        cache: 'maven'
+
+    - name: Build the application jar and run the tests
       run: mvn package
+
     - name: Upload application fat jar artifact
       uses: actions/upload-artifact@v2
       with:
@@ -35,16 +37,7 @@ jobs:
         name: fat-jar
     - name: Build docker container
       run: docker build . --tag codigician-api:$(date +%s)
-    needs: [build]
-
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Running unit tests
-        run: sudo apt-get --only-upgrade install maven \
-          mvn -B test --file pom.xml
-    needs: [build]
+    needs: [build_and_test]
 
   staging-deploy:
     runs-on: ubuntu-latest
@@ -64,4 +57,4 @@ jobs:
         dockerfile_directory: ./
         docker_options: "--no-cache"
         process_type: web
-    needs: [build]
+    needs: [package]
