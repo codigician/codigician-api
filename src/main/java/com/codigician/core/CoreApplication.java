@@ -3,7 +3,7 @@ package com.codigician.core;
 import com.codigician.core.qbank.model.QuestionFactory;
 import com.codigician.core.qbank.model.Tag;
 import com.codigician.core.qbank.repo.InMemoryQuestionRepository;
-import com.codigician.core.qbank.service.CreateQuestionRequest;
+import com.codigician.core.qbank.dto.CreateQuestionRequest;
 import com.codigician.core.qbank.service.QuestionService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

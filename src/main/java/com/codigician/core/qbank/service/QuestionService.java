@@ -1,5 +1,7 @@
 package com.codigician.core.qbank.service;
 
+import com.codigician.core.qbank.dto.CreateQuestionRequest;
+import com.codigician.core.qbank.dto.UpdateQuestionRequest;
 import com.codigician.core.qbank.model.*;
 
 import java.util.List;
