@@ -1,10 +1,8 @@
 package com.codigician.core.qbank.service;
 
-import com.codigician.core.qbank.model.Author;
-import com.codigician.core.qbank.model.Question;
-import com.codigician.core.qbank.model.QuestionFactory;
-import com.codigician.core.qbank.model.QuestionRepository;
+import com.codigician.core.qbank.model.*;
 
+import java.util.List;
 
 public class QuestionService {
     private final QuestionFactory questionFactory;
@@ -28,7 +26,16 @@ public class QuestionService {
         return null;
     }
 
+    public List<Question> filterQuestions(List<Tag> tags) {
+        QuestionBank questionBank = loadQuestionBank();
+        return questionBank.filter(tags.toArray(new Tag[0]));
+    }
+
     private Author getAuthorInformation() {
         return new Author();
+    }
+
+    private QuestionBank loadQuestionBank() {
+        return new QuestionBank();
     }
 }
