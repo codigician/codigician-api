@@ -1,7 +1,6 @@
 package com.codigician.core;
 
 import com.codigician.core.qbank.model.QuestionFactory;
-import com.codigician.core.qbank.repo.DefaultInMemoryRepository;
 import com.codigician.core.qbank.repo.InMemoryQuestionRepository;
 import com.codigician.core.qbank.service.CreateQuestionRequest;
 import com.codigician.core.qbank.service.QuestionService;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CoreApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CoreApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CoreApplication.class, args);
+    }
 
     @GetMapping("/health")
     public void health() {

@@ -5,7 +5,7 @@ import java.util.UUID;
 public abstract class BaseEntity {
     private final String id;
 
-    public BaseEntity()  {
+    public BaseEntity() {
         this.id = UUID.randomUUID().toString();
     }
 

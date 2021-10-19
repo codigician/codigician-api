@@ -18,20 +18,20 @@ public class QuestionBank {
         return null;
     }
 
-    public List<Question> filter(Tag ...tags) {
+    public List<Question> filter(Tag... tags) {
         var filteredQuestions = new ArrayList<Question>();
         var questionFilterCount = new HashMap<Question, Integer>();
-        for(var tag : tags) {
+        for (var tag : tags) {
             var questions = tagQuestionMap.get(tag);
-            for(var question : questions) {
+            for (var question : questions) {
                 questionFilterCount.putIfAbsent(question, 0);
-                questionFilterCount.compute(question, (q, count) -> count+1);
+                questionFilterCount.compute(question, (q, count) -> count + 1);
             }
         }
 
         int tagCount = tags.length;
-        for(var mapEntry : questionFilterCount.entrySet()) {
-            if(mapEntry.getValue() == tagCount) {
+        for (var mapEntry : questionFilterCount.entrySet()) {
+            if (mapEntry.getValue() == tagCount) {
                 filteredQuestions.add(mapEntry.getKey());
             }
         }
