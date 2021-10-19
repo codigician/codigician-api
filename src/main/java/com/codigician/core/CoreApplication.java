@@ -1,6 +1,10 @@
 package com.codigician.core;
 
-import com.codigician.core.qbank.model.Question;
+import com.codigician.core.qbank.model.QuestionFactory;
+import com.codigician.core.qbank.repo.DefaultInMemoryRepository;
+import com.codigician.core.qbank.repo.InMemoryQuestionRepository;
+import com.codigician.core.qbank.service.CreateQuestionRequest;
+import com.codigician.core.qbank.service.QuestionService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,9 +27,14 @@ public class CoreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Question question = Question.create()
-                .prompt("prompt")
-                .editorial("editorial")
-                .build();
+        var questionRepository = new InMemoryQuestionRepository();
+        var questionFactory = new QuestionFactory();
+        var questionService = new QuestionService(questionFactory, questionRepository);
+
+        var createQuestionRequest = new CreateQuestionRequest("my new prompt", "editorial");
+        var question = questionService.create(createQuestionRequest);
+
+        System.out.println("Question created..");
+        System.out.println(question);
     }
 }
