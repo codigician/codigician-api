@@ -22,7 +22,7 @@ public class QuestionBank {
         var filteredQuestions = new ArrayList<Question>();
         var questionFilterCount = new HashMap<Question, Integer>();
         for (var tag : tags) {
-            var questions = tagQuestionMap.get(tag);
+            var questions = tagQuestionMap.getOrDefault(tag, new ArrayList<>());
             for (var question : questions) {
                 questionFilterCount.putIfAbsent(question, 0);
                 questionFilterCount.compute(question, (q, count) -> count + 1);
