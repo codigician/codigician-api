@@ -1,4 +1,4 @@
-package com.codigician.core.qbank.model;
+package com.codigician.core.qbank.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;

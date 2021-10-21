@@ -1,6 +1,6 @@
-package com.codigician.core.qbank.repo;
+package com.codigician.core.qbank.infra.repo;
 
-import com.codigician.core.qbank.model.BaseEntity;
+import com.codigician.core.qbank.domain.BaseEntity;
 
 import java.util.HashMap;
 import java.util.Map;

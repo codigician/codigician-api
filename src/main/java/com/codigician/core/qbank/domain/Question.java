@@ -1,11 +1,11 @@
-package com.codigician.core.qbank.model;
+package com.codigician.core.qbank.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Question extends BaseEntity {
-    private String id;
+    private String title;
     private String prompt;
     private String editorial;
     private Author author;
@@ -16,16 +16,26 @@ public class Question extends BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    Question(Author author, String prompt, String editorial) {
+    Question() {
+    }
+
+    Question(Author author, String title, String prompt) {
         super();
         this.author = author;
+        this.title = title;
         this.prompt = prompt;
-        this.editorial = editorial;
         this.hints = new ArrayList<>();
 
         this.verified = false;
 
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void update(Question other) {
+        this.title = other.title;
+        this.prompt = other.prompt;
+
         this.updatedAt = LocalDateTime.now();
     }
 

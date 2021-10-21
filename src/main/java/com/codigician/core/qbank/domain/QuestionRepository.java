@@ -1,4 +1,4 @@
-package com.codigician.core.qbank.model;
+package com.codigician.core.qbank.domain;
 
 public interface QuestionRepository {
     Question find(String id);

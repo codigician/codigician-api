@@ -1,9 +1,9 @@
-package com.codigician.core.qbank.model;
+package com.codigician.core.qbank.domain;
 
 import java.util.UUID;
 
 public abstract class BaseEntity {
-    private final String id;
+    protected final String id;
 
     public BaseEntity() {
         this.id = UUID.randomUUID().toString();
