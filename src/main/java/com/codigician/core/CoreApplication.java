@@ -1,6 +1,6 @@
 package com.codigician.core;
 
-import com.codigician.core.qbank.infra.cli.QuestionCommandLineDisplay;
+import com.codigician.core.codexec.infra.ContainerClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +23,9 @@ public class CoreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
-       display.displayCreateQuestionMenu();
+//       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
+//       display.displayCreateQuestionMenu();
+        ContainerClient containerClient = new ContainerClient();
+        containerClient.run();
     }
 }
