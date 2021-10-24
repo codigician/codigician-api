@@ -9,27 +9,27 @@ public class QuestionFacade {
         this.questionRepository = questionRepository;
     }
 
-    public Question createQuestion(Author author, QuestionDto questionDto) {
-        Question question = questionFrom(author, questionDto);
-        questionRepository.save(question);
-        return question;
+    public AlgorithmQuestion createQuestion(Author author, QuestionDto questionDto) {
+        AlgorithmQuestion algorithmQuestion = questionFrom(author, questionDto);
+        questionRepository.save(algorithmQuestion);
+        return algorithmQuestion;
     }
 
     public void updateQuestion(String id, QuestionDto questionDto) {
-        Question questionToUpdate = questionRepository.findById(id).orElseThrow();
-        Question newQuestion = questionFrom(questionToUpdate.getAuthor(), questionDto);
-        questionToUpdate.update(newQuestion);
-        questionRepository.save(questionToUpdate);
+        AlgorithmQuestion algorithmQuestionToUpdate = questionRepository.findById(id).orElseThrow();
+        AlgorithmQuestion newAlgorithmQuestion = questionFrom(algorithmQuestionToUpdate.getAuthor(), questionDto);
+        algorithmQuestionToUpdate.update(newAlgorithmQuestion);
+        questionRepository.save(algorithmQuestionToUpdate);
     }
 
     public void verify(String questionId) {
-        Question question = questionRepository.findById(questionId).orElseThrow();
-        question.verify();
-        questionRepository.save(question);
+        AlgorithmQuestion algorithmQuestion = questionRepository.findById(questionId).orElseThrow();
+        algorithmQuestion.verify();
+        questionRepository.save(algorithmQuestion);
     }
 
-    private Question questionFrom(Author author, QuestionDto questionDto) {
-        return Question.create(author, questionDto.title, questionDto.prompt)
+    private AlgorithmQuestion questionFrom(Author author, QuestionDto questionDto) {
+        return AlgorithmQuestion.create(author, questionDto.title, questionDto.prompt)
                 .editorial(questionDto.editorial)
                 .hints(questionDto.hints)
                 .build();

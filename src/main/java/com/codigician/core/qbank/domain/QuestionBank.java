@@ -6,21 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 public class QuestionBank {
-    private final List<Question> questions;
-    private final Map<Tag, List<Question>> tagQuestionMap;
+    private final List<AlgorithmQuestion> algorithmQuestions;
+    private final Map<Tag, List<AlgorithmQuestion>> tagQuestionMap;
 
     public QuestionBank() {
-        questions = new ArrayList<>();
+        algorithmQuestions = new ArrayList<>();
         tagQuestionMap = new HashMap<>();
     }
 
-    public Question getRandomQuestion() {
+    public AlgorithmQuestion getRandomQuestion() {
         return null;
     }
 
-    public List<Question> filter(Tag... tags) {
-        var filteredQuestions = new ArrayList<Question>();
-        var questionFilterCount = new HashMap<Question, Integer>();
+    public List<AlgorithmQuestion> filter(Tag... tags) {
+        var filteredQuestions = new ArrayList<AlgorithmQuestion>();
+        var questionFilterCount = new HashMap<AlgorithmQuestion, Integer>();
         for (var tag : tags) {
             var questions = tagQuestionMap.getOrDefault(tag, new ArrayList<>());
             for (var question : questions) {

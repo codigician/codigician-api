@@ -3,7 +3,7 @@ package com.codigician.core.qbank.domain;
 import java.util.Optional;
 
 public interface QuestionRepository {
-    Optional<Question> findById(String id);
+    Optional<AlgorithmQuestion> findById(String id);
 
-    Question save(Question question);
+    AlgorithmQuestion save(AlgorithmQuestion algorithmQuestion);
 }

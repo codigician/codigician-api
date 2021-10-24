@@ -5,25 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Question {
+public class AlgorithmQuestion {
     private final String id;
+    private final Author author;
     private String title;
     private String prompt;
     private String editorial;
-    private Author author;
     private List<String> hints;
+
+    private final String testFunction;
+    private final List<Expectation> expectations;
 
     private boolean verified;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private Question(Author author, String title, String prompt) {
+    private AlgorithmQuestion(Author author, String title, String prompt) {
         this.id = UUID.randomUUID().toString();
         this.author = author;
         this.title = title;
         this.prompt = prompt;
         this.hints = new ArrayList<>();
+
+        this.expectations = new ArrayList<>();
+        this.testFunction = "";
 
         this.verified = false;
 
@@ -35,7 +41,7 @@ public class Question {
         return new Builder(author, title, prompt);
     }
 
-    public void update(Question other) {
+    public void update(AlgorithmQuestion other) {
         this.title = other.title;
         this.prompt = other.prompt;
         this.editorial = other.editorial;
@@ -95,24 +101,24 @@ public class Question {
     }
 
     public static class Builder {
-        private final Question question;
+        private final AlgorithmQuestion algorithmQuestion;
 
         public Builder(Author author, String title, String prompt) {
-            question = new Question(author, title, prompt);
+            algorithmQuestion = new AlgorithmQuestion(author, title, prompt);
         }
 
         public Builder editorial(String editorial) {
-            this.question.editorial = editorial;
+            this.algorithmQuestion.editorial = editorial;
             return this;
         }
 
         public Builder hints(List<String> hints) {
-            this.question.hints = new ArrayList<>(hints);
+            this.algorithmQuestion.hints = new ArrayList<>(hints);
             return this;
         }
 
-        public Question build() {
-            return question;
+        public AlgorithmQuestion build() {
+            return algorithmQuestion;
         }
     }
 

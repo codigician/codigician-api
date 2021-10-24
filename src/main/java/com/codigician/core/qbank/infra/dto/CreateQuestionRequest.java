@@ -1,4 +1,4 @@
-package com.codigician.core.qbank.infra.http;
+package com.codigician.core.qbank.infra.dto;
 
 import com.codigician.core.qbank.domain.Author;
 

@@ -1,7 +1,8 @@
 package com.codigician.core.qbank.infra.http;
 
-import com.codigician.core.qbank.domain.Question;
+import com.codigician.core.qbank.domain.AlgorithmQuestion;
 import com.codigician.core.qbank.domain.QuestionFacade;
+import com.codigician.core.qbank.infra.dto.CreateQuestionRequest;
 import com.codigician.core.qbank.infra.dto.CreateQuestionResponse;
 import com.codigician.core.qbank.infra.repo.CouchbaseQuestionRepository;
 
@@ -21,15 +22,15 @@ public class QuestionController {
 
     @PostMapping
     public CreateQuestionResponse createQuestion(@RequestBody CreateQuestionRequest request) {
-        Question question = questionFacade.createQuestion(request.author(), toQuestionDto(request));
-        return toResponse(question);
+        AlgorithmQuestion algorithmQuestion = questionFacade.createQuestion(request.author(), toQuestionDto(request));
+        return toResponse(algorithmQuestion);
     }
 
     private QuestionFacade.QuestionDto toQuestionDto(CreateQuestionRequest request) {
         return new QuestionFacade.QuestionDto(request.title(), request.prompt(), request.editorial(), request.hints());
     }
 
-    private CreateQuestionResponse toResponse(Question question) {
+    private CreateQuestionResponse toResponse(AlgorithmQuestion algorithmQuestion) {
         return new CreateQuestionResponse();
     }
 }

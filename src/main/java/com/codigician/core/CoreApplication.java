@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class CoreApplication implements CommandLineRunner {
+public class CoreApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CoreApplication.class, args);
@@ -21,9 +21,9 @@ public class CoreApplication implements CommandLineRunner {
         System.out.println("health check");
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
-       display.displayCreateQuestionMenu();
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
+//       display.displayCreateQuestionMenu();
+//    }
 }
