@@ -13,8 +13,7 @@ public class AlgorithmQuestion {
     private String editorial;
     private List<String> hints;
 
-    private final String testFunction;
-    private final List<Expectation> expectations;
+    private List<Expectation> expectations;
 
     private boolean verified;
 
@@ -29,7 +28,6 @@ public class AlgorithmQuestion {
         this.hints = new ArrayList<>();
 
         this.expectations = new ArrayList<>();
-        this.testFunction = "";
 
         this.verified = false;
 
@@ -86,6 +84,10 @@ public class AlgorithmQuestion {
         return author;
     }
 
+    public List<Expectation> getExpectations() {
+        return expectations;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -108,12 +110,17 @@ public class AlgorithmQuestion {
         }
 
         public Builder editorial(String editorial) {
-            this.algorithmQuestion.editorial = editorial;
+            algorithmQuestion.editorial = editorial;
             return this;
         }
 
         public Builder hints(List<String> hints) {
-            this.algorithmQuestion.hints = new ArrayList<>(hints);
+            algorithmQuestion.hints = new ArrayList<>(hints);
+            return this;
+        }
+
+        public Builder expectations(List<Expectation> expectations) {
+            algorithmQuestion.expectations = expectations;
             return this;
         }
 
