@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question {
-    private String id;
+    private final String id;
     private String title;
     private String prompt;
     private String editorial;
