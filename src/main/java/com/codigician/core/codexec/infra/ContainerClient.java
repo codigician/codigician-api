@@ -2,10 +2,7 @@ package com.codigician.core.codexec.infra;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.async.ResultCallback;
-import com.github.dockerjava.api.command.ExecCreateCmd;
-import com.github.dockerjava.api.command.ExecCreateCmdResponse;
-import com.github.dockerjava.api.command.ExecStartCmd;
-import com.github.dockerjava.api.command.ListImagesCmd;
+import com.github.dockerjava.api.command.*;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Image;
@@ -14,6 +11,7 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
+import com.github.dockerjava.transport.DockerHttpClient;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +38,14 @@ public class ContainerClient {
         System.out.println(info);
         List<Image> images = listImagesCmd.exec();
         images.forEach(System.out::println);
+        dockerClient
+                .startContainerCmd("ubuntu")
+                .withContainerId("89d39fa1ccb2")
+                .exec();
 
+        System.out.println("********* Containers *********");
+        List<Container> containers = dockerClient.listContainersCmd().exec();
+        containers.forEach(System.out::println);
 
         String containerId = "89d39fa1ccb2";
         ExecCreateCmd execCreateCmd = dockerClient.execCreateCmd(containerId);
@@ -53,6 +58,7 @@ public class ContainerClient {
         System.out.println(response);
         System.out.println(response.getRawValues());
 
+        var startCommand = dockerClient.execStartCmd(response.getId());
         dockerClient.execStartCmd(response.getId())
                 .exec(new ResultCallback<Frame>() {
                     @Override
