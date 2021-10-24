@@ -2,10 +2,11 @@ package com.codigician.core.qbank.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
-public class Question extends BaseEntity {
+public class Question {
+    private String id;
     private String title;
     private String prompt;
     private String editorial;
@@ -17,11 +18,8 @@ public class Question extends BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    Question() {
-    }
-
-    Question(Author author, String title, String prompt) {
-        super();
+    private Question(Author author, String title, String prompt) {
+        this.id = UUID.randomUUID().toString();
         this.author = author;
         this.title = title;
         this.prompt = prompt;
@@ -46,12 +44,8 @@ public class Question extends BaseEntity {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void setHints(List<String> hints) {
-        this.hints = hints;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
+    public void verify() {
+        this.verified = true;
     }
 
     public boolean isVerified() {
@@ -82,6 +76,10 @@ public class Question extends BaseEntity {
         return updatedAt;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -96,7 +94,6 @@ public class Question extends BaseEntity {
                 '}';
     }
 
-
     public static class Builder {
         private final Question question;
 
@@ -109,8 +106,8 @@ public class Question extends BaseEntity {
             return this;
         }
 
-        public Builder hints(String... hints) {
-            this.question.hints = Arrays.asList(hints);
+        public Builder hints(List<String> hints) {
+            this.question.hints = new ArrayList<>(hints);
             return this;
         }
 

@@ -12,12 +12,13 @@ class QuestionTest {
 
     @Test
     void update() {
-        Question questionToUpdate = new Question(new Author(), "old", "oldPropmt");
+        Question questionToUpdate = Question.create(new Author(), "old", "oldPropmt").build();
         LocalDateTime oldUpdatedAt = questionToUpdate.getUpdatedAt();
         boolean oldIsVerified = questionToUpdate.isVerified();
-        Question newQuestion = new Question(new Author(), "newTitle", "newPrompt") ;
-        newQuestion.setHints(Arrays.asList("hitn1","hint2"));
-        newQuestion.setEditorial("newEditorial");
+        Question newQuestion = Question.create(new Author(), "newTitle", "newPrompt")
+                .hints(Arrays.asList("hitn1", "hint2"))
+                .editorial("newEditorial")
+                .build();
         questionToUpdate.update(newQuestion);
 
         assertThat(questionToUpdate.getTitle()).isEqualTo(newQuestion.getTitle());

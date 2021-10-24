@@ -26,7 +26,7 @@ public class QuestionCommandLineDisplay {
         System.out.println("Please enter question prompt");
         String questionPrompt = scanner.next();
 
-        var question = commandLineRunner.createQuestion(questionTitle, questionPrompt);
+        var question = commandLineRunner.createQuestion(questionTitle, questionPrompt, "editoiral");
         System.out.println(question);
     }
 }

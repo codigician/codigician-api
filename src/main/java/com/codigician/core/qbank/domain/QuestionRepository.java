@@ -1,9 +1,9 @@
 package com.codigician.core.qbank.domain;
 
+import java.util.Optional;
+
 public interface QuestionRepository {
-    Question find(String id);
+    Optional<Question> findById(String id);
 
-    void save(Question question);
-
-    void update(Question question);
+    Question save(Question question);
 }

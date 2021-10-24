@@ -31,6 +31,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+		<!-- repository -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-couchbase</artifactId>
+		</dependency>
+		<!-- repository -->
     </dependencies>
 
 	<build>
