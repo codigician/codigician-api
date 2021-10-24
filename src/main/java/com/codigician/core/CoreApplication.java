@@ -1,6 +1,7 @@
 package com.codigician.core;
 
-import com.codigician.core.codexec.infra.ContainerClient;
+import com.codigician.core.codexec.domain.GenericContainer;
+import com.codigician.core.codexec.domain.GenericContainerPool;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,9 +24,10 @@ public class CoreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
-//       display.displayCreateQuestionMenu();
-        ContainerClient containerClient = new ContainerClient();
-        containerClient.run();
+        GenericContainerPool containerPool = new GenericContainerPool();
+        containerPool.metrics();
+        GenericContainer genericContainer = containerPool.get();
+        String rawOutput = genericContainer.execute("python", "--version");
+        System.out.println(rawOutput);
     }
 }
