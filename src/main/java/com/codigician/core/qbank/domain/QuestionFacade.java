@@ -8,7 +8,9 @@ public class QuestionFacade {
     }
 
     public Question createQuestion(Author author, QuestionDto questionDto) {
-        Question question = new Question(author, questionDto.title, questionDto.prompt);
+        Question question = Question.create(author, questionDto.title, questionDto.prompt)
+                .editorial(questionDto.editorial)
+                .build();
         questionRepository.save(question);
         return question;
     }
@@ -21,6 +23,6 @@ public class QuestionFacade {
     }
 
 
-    public static record QuestionDto(String title, String prompt) {
+    public static record QuestionDto(String title, String prompt, String editorial) {
     }
 }
