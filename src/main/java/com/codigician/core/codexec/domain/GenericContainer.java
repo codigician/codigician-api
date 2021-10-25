@@ -3,25 +3,38 @@ package com.codigician.core.codexec.domain;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.model.Frame;
+import org.springframework.context.annotation.ScopeMetadata;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class GenericContainer {
     private final DockerClient dockerClient;
+    private final ContainerMetrics containerMetrics;
     private final String id;
-    private int activeTasks;
 
     GenericContainer(DockerClient dockerClient, String id) {
         this.dockerClient = dockerClient;
+        this.containerMetrics = new ContainerMetrics();
         this.id = id;
-        this.activeTasks = 0;
     }
 
     public String execute(String... commands) throws InterruptedException {
+        return executeInternalMetricRecorder(commands);
+    }
+
+    private String executeInternalMetricRecorder(String... commands) throws InterruptedException {
+        var singleExecutionMetrics = containerMetrics.startSingleExecution();
+        String executionResult = executeInternal(commands);
+        singleExecutionMetrics.end();
+        return executionResult;
+    }
+
+    private String executeInternal(String... commands) throws InterruptedException {
         var executeCreateCommand = dockerClient.execCreateCmd(id)
                 .withCmd(commands)
                 .withAttachStdout(true)
