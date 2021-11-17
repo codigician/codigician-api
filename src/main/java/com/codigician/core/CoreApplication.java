@@ -1,6 +1,7 @@
 package com.codigician.core;
 
-import com.codigician.core.qbank.infra.cli.QuestionCommandLineDisplay;
+import com.codigician.core.codexec.domain.GenericContainer;
+import com.codigician.core.codexec.domain.GenericContainerPool;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,9 +22,12 @@ public class CoreApplication {
         System.out.println("health check");
     }
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//       QuestionCommandLineDisplay display = new QuestionCommandLineDisplay();
-//       display.displayCreateQuestionMenu();
-//    }
+    @Override
+    public void run(String... args) throws Exception {
+        GenericContainerPool containerPool = new GenericContainerPool();
+        containerPool.metrics();
+        GenericContainer genericContainer = containerPool.get();
+        String rawOutput = genericContainer.execute("python", "--version");
+        System.out.println(rawOutput);
+    }
 }
