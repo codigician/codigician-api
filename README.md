@@ -1,5 +1,27 @@
 # codigician-api
 
+# Getting Started
+
+You can use docker compose to run the application.
+```bash
+# go to build directory
+$ cd build/
+# start couchbase container
+$ docker compose up
+# after couchbase initialized
+# run the couchbase.sh to initialize bucket
+$ sh couchbase.sh
+```
+
+After you complete the steps above you can goto `localhost:8091` to see couchbase ui.
+```
+http://localhost:8091
+    Username: Administrator
+    Password: password
+```
+
+You can run the application in debug mode or you can run directly.
+
 # Question Code Testing
 
 There is no need to have code templates. We can directly use expectation outputs and inputs. Client will write the
