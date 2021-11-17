@@ -1,22 +1,12 @@
 package com.codigician.core.codexec.domain;
 
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.BuildImageResultCallback;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
-import com.google.common.io.Resources;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class GenericContainerPool {
     private final Map<String, GenericContainer> containers = new HashMap<>();
