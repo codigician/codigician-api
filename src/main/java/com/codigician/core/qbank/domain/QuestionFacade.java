@@ -38,6 +38,7 @@ public class QuestionFacade {
     public static record QuestionDto(String title,
                                      String prompt,
                                      String editorial,
-                                     List<String> hints) {
+                                     List<String> hints,
+                                     List<Expectation> expectations) {
     }
 }

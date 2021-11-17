@@ -2,35 +2,30 @@ package com.codigician.core.qbank.infra.http;
 
 import com.codigician.core.qbank.domain.AlgorithmQuestion;
 import com.codigician.core.qbank.domain.QuestionFacade;
-import com.codigician.core.qbank.infra.dto.CreateQuestionRequest;
-import com.codigician.core.qbank.infra.dto.CreateQuestionResponse;
+import com.codigician.core.qbank.infra.ObjectFactory;
+import com.codigician.core.qbank.infra.dto.UpsertQuestionRequest;
+import com.codigician.core.qbank.infra.dto.UpsertQuestionResponse;
 import com.codigician.core.qbank.infra.repo.CouchbaseQuestionRepository;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import static com.codigician.core.qbank.infra.ObjectMapper.toQuestionDto;
+import static com.codigician.core.qbank.infra.ObjectMapper.toResponse;
 
 @RestController
-@RequestMapping("/v1/question")
+@RequestMapping("/api/v1/questions")
 public class QuestionController {
     private final QuestionFacade questionFacade;
 
     public QuestionController(CouchbaseQuestionRepository couchbaseQuestionRepository) {
-        questionFacade = new QuestionFacade(couchbaseQuestionRepository);
+        questionFacade = ObjectFactory.getQuestionFacade(couchbaseQuestionRepository);
     }
 
     @PostMapping
-    public CreateQuestionResponse createQuestion(@RequestBody CreateQuestionRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public UpsertQuestionResponse createQuestion(@RequestBody UpsertQuestionRequest request) {
         AlgorithmQuestion algorithmQuestion = questionFacade.createQuestion(request.author(), toQuestionDto(request));
         return toResponse(algorithmQuestion);
-    }
-
-    private QuestionFacade.QuestionDto toQuestionDto(CreateQuestionRequest request) {
-        return new QuestionFacade.QuestionDto(request.title(), request.prompt(), request.editorial(), request.hints());
-    }
-
-    private CreateQuestionResponse toResponse(AlgorithmQuestion algorithmQuestion) {
-        return new CreateQuestionResponse();
     }
 }

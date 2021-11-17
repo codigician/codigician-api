@@ -22,7 +22,8 @@ class AlgorithmQuestionFacadeTest {
         QuestionFacade.QuestionDto questionDto = new QuestionFacade.QuestionDto("title",
                 "prompt",
                 "editorial",
-                List.of("hints1"));
+                List.of("hints1"),
+                List.of());
 
         AlgorithmQuestion algorithmQuestion = questionFacade.createQuestion(AUTHOR, questionDto);
 

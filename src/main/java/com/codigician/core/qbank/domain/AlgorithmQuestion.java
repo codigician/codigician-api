@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class AlgorithmQuestion {
-    private final String id;
-    private final Author author;
+    private String id;
+    private Author author;
     private String title;
     private String prompt;
     private String editorial;
@@ -17,7 +17,7 @@ public class AlgorithmQuestion {
 
     private boolean verified;
 
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     private AlgorithmQuestion(Author author, String title, String prompt) {
@@ -86,6 +86,10 @@ public class AlgorithmQuestion {
 
     public List<Expectation> getExpectations() {
         return expectations;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     @Override

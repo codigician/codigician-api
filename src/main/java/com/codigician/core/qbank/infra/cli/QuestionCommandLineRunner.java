@@ -14,13 +14,13 @@ public class QuestionCommandLineRunner {
     }
 
     public AlgorithmQuestion createQuestion(String title, String prompt, String editorial) {
-        var questionDto = new QuestionFacade.QuestionDto(title, prompt, editorial, List.of(""));
+        var questionDto = new QuestionFacade.QuestionDto(title, prompt, editorial, List.of(""), List.of());
         AlgorithmQuestion algorithmQuestion = questionFacade.createQuestion(getAuthor(), questionDto);
         return toCreateQuestionResponse(algorithmQuestion);
     }
 
     public void updateQuestion(String id, String title, String prompt, String editorial) {
-        var questionDto = new QuestionFacade.QuestionDto(title, prompt, editorial, List.of(""));
+        var questionDto = new QuestionFacade.QuestionDto(title, prompt, editorial, List.of(""), List.of());
         questionFacade.updateQuestion(id, questionDto);
     }
 
