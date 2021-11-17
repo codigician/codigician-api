@@ -1,33 +1,20 @@
 # codigician-api
-## Codigician backend application.
 
+# Question Code Testing
 
-- Algorithm Solution Service - Backend
-
-Requirements:
-- Remote Code Execution System
-- Auth
-- User (Score, Progress)
-- Question Bank --- Approve 
-- Discussion
-- Editorial -> rich text
-- Tutorial - Lessons
-
-# Tech Stack
-- Java
-- PostgreSQL
-- Redis
-- Docker - Remote code execution
-
-
-curl -i -X POST <host>/:qid {questionId: …, solution: ….}
-
-# Priority
-1. Remote code execution
-2. Question bank (Editorial) (Unit tests, benchmark tests)
-3. User
-4. Discussion
+There is no need to have code templates. We can directly use expectation outputs and inputs. Client will write the
+solution code. We run the code with some inputs and if the output is what we expected then that means the test is
+passed. While we run these commands we need to have that information as a json or we will have it like an array. Also
+the runtime is important for benchmark.
 
 # Container Structure Design
 
 ![container structure](.docs/png/container-structure.png)
+
+# Priority
+
+1. Remote code execution
+2. Question bank (Editorial) (Unit tests, benchmark tests)
+3. Auth, User (Score, Progress)
+4. Discussion
+5. Tutorial
